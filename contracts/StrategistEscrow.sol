@@ -76,6 +76,7 @@ contract StrategistEscrow {
             _releaseTime <= block.timestamp.add(FOURYEARS).add(ONEMONTH),
             "_releaseTime > 4y1"
         );
+        require(_releaseTime > block.timestamp, "_releaseTime in past");
         releaseTime = _releaseTime;
 
         ychad = 0xFEB4acf3df3cDEA7399794D0869ef76A6EfAff52;
