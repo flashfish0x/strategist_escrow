@@ -2,6 +2,11 @@ import pytest
 from brownie import Wei, config
 
 
+@pytest.fixture(scope='function', autouse=True)
+def shared_setup(fn_isolation):
+    pass
+
+
 @pytest.fixture
 def whale(accounts, yfi):
     # multichain bridge
@@ -38,7 +43,7 @@ def ychad(accounts):
 
 
 @pytest.fixture
-def releaseTime():
+def releaseTime(chain):
     yield 1646732361 + (60 * 60 * 24 * 365 * 4)
 
 
