@@ -1,0 +1,38 @@
+{
+  "contracts": {
+    "OpenZeppelin/openzeppelin-contracts@3.1.0/Address": "3b4158955f564edb18bd7a8ffdb49859c904f0b7",
+    "OpenZeppelin/openzeppelin-contracts@3.1.0/SafeERC20": "3b4158955f564edb18bd7a8ffdb49859c904f0b7",
+    "OpenZeppelin/openzeppelin-contracts@3.1.0/SafeMath": "3b4158955f564edb18bd7a8ffdb49859c904f0b7",
+    "StrategistEscrow": "78865a0a583d3e9b2dfe2cf10947520305dc6a1a"
+  },
+  "tests": {
+    "tests/test_escrow_simple.py": {
+      "coverage": false,
+      "isolated": false,
+      "results": "..",
+      "sha1": "a0d6b7b5dde54eab9d8673f69b8373e6148afc60",
+      "txhash": [
+        "f46def3fe77d1a90c267d88505c1ee537675cb81"
+      ]
+    }
+  },
+  "tx": {
+    "f46def3fe77d1a90c267d88505c1ee537675cb81": {
+      "StrategistEscrow": {
+        "4": [
+          [
+            28,
+            29
+          ],
+          [
+            63,
+            64
+          ],
+          [
+            60
+          ]
+        ]
+      }
+    }
+  }
+}
