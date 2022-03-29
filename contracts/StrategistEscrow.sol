@@ -103,6 +103,10 @@ contract StrategistEscrow {
         require(pendingStrategist == msg.sender);
         strategist = pendingStrategist;
     }
+    function renounceStrategist() external {
+        require(strategist == msg.sender);
+        strategist = address(0);
+    }
 
     function changeYchad(address _newYchad) external {
         require(ychad == msg.sender);
