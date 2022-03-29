@@ -14,8 +14,10 @@ contract StrategistEscrow {
     //constant stays through clone
     IERC20 public constant yfi =
         IERC20(0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e);
-    uint256 internal constant ONEMONTH = 60 * 60 * 24 * 30;
-    uint256 internal constant FOURYEARS = 60 * 60 * 24 * 365 * 4;
+    uint256 internal constant ONEYEAR = 365 days;
+    uint256 internal constant ONEMONTH = ONEYEAR / 12;
+    uint256 internal constant FOURYEARS = 4 * ONEYEAR;
+
 
     //non constant doesnt. so will be false on all but original
     bool internal isOriginal = true;
@@ -36,7 +38,7 @@ contract StrategistEscrow {
     address public migrateTargetStrategist;
     address public migrateTargetYchad;
 
-    uint256 releaseTime;
+    uint256 public releaseTime;
 
     constructor(address _strategist, uint256 _releaseTime) public {
         initialize(_strategist, _releaseTime);
@@ -84,6 +86,13 @@ contract StrategistEscrow {
         emit EscrowSetup(address(this), _strategist, _releaseTime);
     }
 
+    function changePendingStrategist(address _newStrategist) external {
+        require(strategist == address(0));
+        require(ychad == msg.sender);
+        require(_newStrategist != address(0), "cant set to zero");
+        pendingStrategist = _newStrategist;
+    }
+
     function changeStrategist(address _newStrategist) external {
         require(strategist == msg.sender);
         require(_newStrategist != address(0), "cant set to zero");
@@ -93,6 +102,10 @@ contract StrategistEscrow {
     function acceptStrategist() external {
         require(pendingStrategist == msg.sender);
         strategist = pendingStrategist;
+    }
+    function renounceStrategist() external {
+        require(strategist == msg.sender);
+        strategist = address(0);
     }
 
     function changeYchad(address _newYchad) external {
@@ -161,7 +174,7 @@ contract StrategistEscrow {
     ) external {
         require(ychad == msg.sender, "ychad only");
         require(
-            releaseTime.add(FOURYEARS) >= block.timestamp,
+            releaseTime.add(FOURYEARS) <= block.timestamp,
             "escrow + 4y not over"
         );
         _sweep(_token, _amount, _target);
