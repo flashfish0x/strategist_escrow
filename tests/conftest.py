@@ -44,7 +44,7 @@ def ychad(accounts):
 
 @pytest.fixture
 def releaseTime(chain):
-    yield 1646732361 + (60 * 60 * 24 * 365 * 4)
+    yield chain.time() + (60 * 60 * 24 * 365 * 4) 
 
 
 @pytest.fixture

@@ -14,8 +14,9 @@ contract StrategistEscrow {
     //constant stays through clone
     IERC20 public constant yfi =
         IERC20(0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e);
-    uint256 internal constant ONEMONTH = 1 years / 12;
-    uint256 internal constant FOURYEARS = 4 years;
+    uint256 internal constant ONEYEAR = 365 days;
+    uint256 internal constant ONEMONTH = ONEYEAR / 12;
+    uint256 internal constant FOURYEARS = 4 * ONEYEAR;
 
 
     //non constant doesnt. so will be false on all but original
